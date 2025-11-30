@@ -81,3 +81,66 @@ body {
     font-size: 0.85rem;
     color: var(--text-gray);
 }
+
+/* =========================================
+   NUEVOS ESTILOS AGREGADOS (Header y Footer)
+   ========================================= */
+
+/* --- Header y Navegación --- */
+.main-header {
+    background-color: rgba(20, 20, 20, 0.95); /* Casi negro, con transparencia */
+    border-bottom: 2px solid var(--primary-color);
+    position: sticky; /* Se queda pegado arriba */
+    top: 0;
+    z-index: 100; /* Asegura que esté encima de las películas */
+    padding: 15px 0;
+    backdrop-filter: blur(5px); /* Efecto borroso estilo iOS/Glassmorphism */
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    letter-spacing: 1px;
+}
+
+.logo span {
+    color: var(--text-white);
+    font-size: 0.5em;
+    text-transform: uppercase;
+    margin-left: 5px;
+}
+
+/* --- Ajuste del contenido principal --- */
+.content-wrapper {
+    margin-top: 30px;
+    margin-bottom: 50px;
+    min-height: 80vh; /* Empuja el footer hacia abajo si hay pocas pelis */
+}
+
+/* --- Footer --- */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #000;
+    color: #666;
+    font-size: 0.9rem;
+    margin-top: auto;
+    border-top: 1px solid #333;
+}
+
+/* --- Rejilla de Películas (Grid) --- */
+#movies-grid {
+    display: grid;
+    /* Esto crea columnas automáticas de mínimo 200px */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+    gap: 30px; /* Espacio entre tarjetas */
+    width: 100%;
+    margin-top: 20px;
+}
