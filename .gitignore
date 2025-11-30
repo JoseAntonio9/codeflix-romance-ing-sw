@@ -1,0 +1,6 @@
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar configuración con claves secretas
+js/config.js
