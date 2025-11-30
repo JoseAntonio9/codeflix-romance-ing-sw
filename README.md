@@ -34,7 +34,7 @@ Sigue estos pasos para ejecutar el proyecto localmente:
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/TU_USUARIO/codeflix-romance-ing-sw.git
+   git clone https://github.com/JoseAntonio9/codeflix-romance-ing-sw.git
    cd codeflix-romance-ing-sw
    ```
 
