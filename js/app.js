@@ -1,13 +1,13 @@
 // Referencias al DOM
 const moviesGrid = document.getElementById("movies-grid");
-const searchInput = document.getElementById("search-input"); // Nueva referencia
+const searchInput = document.getElementById("search-input");
 const modal = document.getElementById("movie-modal");
 const closeModalBtn = document.querySelector(".close-btn");
 
 // Función principal
 async function initApp() {
   console.log("Iniciando CodeFlix Romance...");
-  loadRomanceMovies(); // Refactorizamos para poder reutilizar
+  loadRomanceMovies();
 
   // Configurar el buscador
   setupSearch();
@@ -24,9 +24,7 @@ function setupSearch() {
   searchInput.addEventListener("input", async (e) => {
     const query = e.target.value.trim();
 
-    // --- AGREGA ESTO PARA PROBAR ---
     console.log("El usuario está escribiendo:", query);
-    // -------------------------------
 
     if (query.length > 2) {
       const results = await API.searchMovies(query);
@@ -39,15 +37,21 @@ function setupSearch() {
   });
 }
 
-// Renderizado (Igual que antes, no hace falta cambiarlo)
+// Renderizado de películas
 function renderMovies(movies) {
   moviesGrid.innerHTML = "";
 
+  // --- CAMBIO REALIZADO AQUÍ (Feedback de búsqueda mejorado) ---
   if (!movies || movies.length === 0) {
-    moviesGrid.innerHTML =
-      '<p style="color:white;">No se encontraron resultados.</p>';
+    moviesGrid.innerHTML = `
+        <div style="text-align:center; width:100%; grid-column: 1 / -1;">
+            <p style="font-size: 1.2rem; margin-bottom: 10px;">No se encontraron películas de Romance con ese nombre 💔</p>
+            <p style="color: var(--text-gray);">Intenta buscar películas como "Orgullo y Prejuicio", "Titanic" o "Eterno resplandor de una mente sin recuerdos".</p>
+        </div>
+    `;
     return;
   }
+  // -----------------------------------------------------------
 
   movies.forEach((movie) => {
     const imagePath = movie.poster_path
@@ -61,21 +65,16 @@ function renderMovies(movies) {
             <div class="card-image-container">
                 <img src="${imagePath}" alt="${movie.title}" loading="lazy">
                 <div class="card-overlay">
-                    <span class="rating">★ ${movie.vote_average.toFixed(
-                      1
-                    )}</span>
+                    <span class="rating">★ ${movie.vote_average.toFixed(1)}</span>
                 </div>
             </div>
             <div class="card-info">
                 <h3>${movie.title}</h3>
-                <p>${
-                  movie.release_date ? movie.release_date.split("-")[0] : "N/D"
-                }</p>
+                <p>${movie.release_date ? movie.release_date.split('-')[0] : 'Sin fecha'}</p>
             </div>
         `;
 
-    // --- AQUÍ ESTÁ LA MAGIA DEL CLIC ---
-    // Al hacer clic, llamamos a la función de detalle con el ID de la peli
+    // Al hacer clic, llamamos a la función de detalle
     card.addEventListener("click", () => showMovieDetail(movie.id));
 
     moviesGrid.appendChild(card);
@@ -84,12 +83,13 @@ function renderMovies(movies) {
 
 document.addEventListener("DOMContentLoaded", initApp);
 
+// --- Lógica del Modal (Detalle) ---
 async function showMovieDetail(id) {
   // 1. Pedir datos a la API
   const movie = await API.getMovieDetail(id);
   if (!movie) return;
 
-  // 2. Llenar el HTML del modal con los datos
+  // 2. Llenar el HTML del modal
   document.getElementById("modal-title").textContent = movie.title;
   document.getElementById("modal-overview").textContent =
     movie.overview || "Sin descripción disponible.";
@@ -105,23 +105,24 @@ async function showMovieDetail(id) {
     : "https://via.placeholder.com/500x750?text=No+Image";
   document.getElementById("modal-img").src = imagePath;
 
-  // 3. Mostrar el modal (agregando la clase CSS)
+  // 3. Mostrar el modal y bloquear scroll del body
+  document.body.style.overflow = 'hidden'; // Congela el fondo
   modal.classList.add("show");
 }
 
 // Cerrar el modal al dar clic en la X
 closeModalBtn.addEventListener("click", () => {
   modal.classList.remove("show");
+  document.body.style.overflow = 'auto'; // Reactiva el scroll
 });
 
-// Cerrar el modal al dar clic fuera del contenido (en el fondo oscuro)
+// Cerrar el modal al dar clic fuera del contenido
 window.addEventListener("click", (e) => {
   if (e.target === modal) {
     modal.classList.remove("show");
+    document.body.style.overflow = 'auto'; // Reactiva el scroll
   }
 });
-
-// js/app.js - Al final del archivo
 
 // --- Lógica del Formulario de Contacto ---
 const contactForm = document.getElementById("contact-form");
@@ -129,46 +130,48 @@ const nameInput = document.getElementById("name");
 const emailInput = document.getElementById("email");
 const messageInput = document.getElementById("message");
 
-contactForm.addEventListener("submit", (e) => {
-  e.preventDefault(); // Evita que se recargue la página
+if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+    e.preventDefault(); // Evita que se recargue la página
 
-  let isValid = true;
+    let isValid = true;
 
-  // 1. Validar Nombre (No vacío)
-  if (nameInput.value.trim() === "") {
-    setError(nameInput);
-    isValid = false;
-  } else {
-    setSuccess(nameInput);
-  }
+    // 1. Validar Nombre
+    if (nameInput.value.trim() === "") {
+        setError(nameInput);
+        isValid = false;
+    } else {
+        setSuccess(nameInput);
+    }
 
-  // 2. Validar Email (Formato regex simple)
-  if (!isValidEmail(emailInput.value)) {
-    setError(emailInput);
-    isValid = false;
-  } else {
-    setSuccess(emailInput);
-  }
+    // 2. Validar Email
+    if (!isValidEmail(emailInput.value)) {
+        setError(emailInput);
+        isValid = false;
+    } else {
+        setSuccess(emailInput);
+    }
 
-  // 3. Validar Mensaje (No vacío)
-  if (messageInput.value.trim() === "") {
-    setError(messageInput);
-    isValid = false;
-  } else {
-    setSuccess(messageInput);
-  }
+    // 3. Validar Mensaje
+    if (messageInput.value.trim() === "") {
+        setError(messageInput);
+        isValid = false;
+    } else {
+        setSuccess(messageInput);
+    }
 
-  // Si todo es válido
-  if (isValid) {
-    alert("¡Mensaje enviado con éxito! (Simulación)");
-    contactForm.reset(); // Limpiar formulario
-  }
-});
+    // Si todo es válido
+    if (isValid) {
+        alert("¡Mensaje enviado con éxito! (Simulación)");
+        contactForm.reset();
+    }
+    });
+}
 
 // Funciones auxiliares para mostrar/quitar errores
 function setError(input) {
-  input.classList.add("error"); // Pone borde rojo
-  input.parentElement.classList.add("invalid"); // Muestra mensaje de texto
+  input.classList.add("error");
+  input.parentElement.classList.add("invalid");
 }
 
 function setSuccess(input) {
@@ -177,7 +180,6 @@ function setSuccess(input) {
 }
 
 function isValidEmail(email) {
-  // Expresión regular básica para validar correos
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(String(email).toLowerCase());
 }
