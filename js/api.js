@@ -13,24 +13,31 @@ const API = {
     }
   },
 
-  // --- NUEVO MÉTODO: Búsqueda ---
+  // --- MÉTODO CORREGIDO: Búsqueda con Filtro de Romance ---
   searchMovies: async (query) => {
     try {
-      // Endpoint de búsqueda (search/movie)
-      const url = `${CONFIG.API_URL}/search/movie?api_key=${
-        CONFIG.API_KEY
-      }&language=es-MX&query=${encodeURIComponent(query)}&include_adult=false`;
+      const url = `${CONFIG.API_URL}/search/movie?api_key=${CONFIG.API_KEY}&language=es-MX&query=${encodeURIComponent(query)}&include_adult=false`;
 
       const response = await fetch(url);
       if (!response.ok) throw new Error(`Error búsqueda: ${response.status}`);
 
       const data = await response.json();
-      return data.results;
+
+      // Filtramos para devolver SOLO las que tengan el género Romance (ID 10749)
+      const romanceMovies = data.results.filter(movie => 
+          movie.genre_ids && movie.genre_ids.includes(10749)
+      );
+      
+      return romanceMovies; 
+      // --------------------------
+
     } catch (error) {
       console.error("Falló la búsqueda:", error);
       return [];
     }
   },
+
+  // Método de detalle
   getMovieDetail: async (id) => {
     try {
       const url = `${CONFIG.API_URL}/movie/${id}?api_key=${CONFIG.API_KEY}&language=es-MX`;
