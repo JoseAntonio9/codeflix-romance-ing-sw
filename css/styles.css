@@ -1,85 +1,85 @@
-@import 'vars.css';
+@import "vars.css";
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: var(--text-white);
-    font-family: var(--font-main);
+  background-color: var(--bg-dark);
+  color: var(--text-white);
+  font-family: var(--font-main);
 }
 
 .container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 20px;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 /* --- Estilos de las Tarjetas (Movie Cards) --- */
 
 .movie-card {
-    background-color: var(--bg-card);
-    border-radius: 8px;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    border: 1px solid transparent; /* Preparado para el hover */
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  border: 1px solid transparent; /* Preparado para el hover */
 }
 
 /* Efecto Hover: se levanta y brilla en rosa */
 .movie-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
-    border-color: var(--primary-color);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-color: var(--primary-color);
 }
 
 .card-image-container {
-    position: relative;
-    width: 100%;
-    /* Aspect ratio estándar de póster de cine (2:3) */
-    padding-top: 150%; 
+  position: relative;
+  width: 100%;
+  /* Aspect ratio estándar de póster de cine (2:3) */
+  padding-top: 150%;
 }
 
 .card-image-container img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .card-overlay {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 4px 8px;
-    border-radius: 4px;
-    color: #FFD700; /* Color dorado para la estrella */
-    font-weight: bold;
-    font-size: 0.9rem;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 8px;
+  border-radius: 4px;
+  color: #ffd700; /* Color dorado para la estrella */
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
 .card-info {
-    padding: 15px;
+  padding: 15px;
 }
 
 .card-info h3 {
-    font-size: 1rem;
-    margin-bottom: 5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; /* Pone "..." si el título es muy largo */
-    color: var(--text-white);
+  font-size: 1rem;
+  margin-bottom: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Pone "..." si el título es muy largo */
+  color: var(--text-white);
 }
 
 .card-info p {
-    font-size: 0.85rem;
-    color: var(--text-gray);
+  font-size: 0.85rem;
+  color: var(--text-gray);
 }
 
 /* =========================================
@@ -88,59 +88,258 @@ body {
 
 /* --- Header y Navegación --- */
 .main-header {
-    background-color: rgba(20, 20, 20, 0.95); /* Casi negro, con transparencia */
-    border-bottom: 2px solid var(--primary-color);
-    position: sticky; /* Se queda pegado arriba */
-    top: 0;
-    z-index: 100; /* Asegura que esté encima de las películas */
-    padding: 15px 0;
-    backdrop-filter: blur(5px); /* Efecto borroso estilo iOS/Glassmorphism */
+  background-color: rgba(20, 20, 20, 0.95); /* Casi negro, con transparencia */
+  border-bottom: 2px solid var(--primary-color);
+  position: sticky; /* Se queda pegado arriba */
+  top: 0;
+  z-index: 100; /* Asegura que esté encima de las películas */
+  padding: 15px 0;
+  backdrop-filter: blur(5px); /* Efecto borroso estilo iOS/Glassmorphism */
 }
 
 .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    letter-spacing: 1px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  letter-spacing: 1px;
 }
 
 .logo span {
-    color: var(--text-white);
-    font-size: 0.5em;
-    text-transform: uppercase;
-    margin-left: 5px;
+  color: var(--text-white);
+  font-size: 0.5em;
+  text-transform: uppercase;
+  margin-left: 5px;
 }
 
 /* --- Ajuste del contenido principal --- */
 .content-wrapper {
-    margin-top: 30px;
-    margin-bottom: 50px;
-    min-height: 80vh; /* Empuja el footer hacia abajo si hay pocas pelis */
+  margin-top: 30px;
+  margin-bottom: 50px;
+  min-height: 80vh; /* Empuja el footer hacia abajo si hay pocas pelis */
 }
 
 /* --- Footer --- */
 .main-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #000;
-    color: #666;
-    font-size: 0.9rem;
-    margin-top: auto;
-    border-top: 1px solid #333;
+  text-align: center;
+  padding: 20px;
+  background-color: #000;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: auto;
+  border-top: 1px solid #333;
 }
 
 /* --- Rejilla de Películas (Grid) --- */
 #movies-grid {
-    display: grid;
-    /* Esto crea columnas automáticas de mínimo 200px */
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
-    gap: 30px; /* Espacio entre tarjetas */
-    width: 100%;
-    margin-top: 20px;
+  display: grid;
+  /* Esto crea columnas automáticas de mínimo 200px */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px; /* Espacio entre tarjetas */
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* --- Estilos del Buscador --- */
+.search-box input {
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid #444;
+  border-radius: 20px;
+  padding: 8px 15px;
+  color: var(--text-white);
+  font-family: var(--font-main);
+  outline: none;
+  transition: all 0.3s ease;
+  width: 200px; /* Tamaño inicial */
+}
+
+.search-box input:focus {
+  width: 280px; /* Se expande al escribir */
+  border-color: var(--primary-color); /* Borde Rosa Mexicano */
+  box-shadow: 0 0 8px rgba(228, 0, 124, 0.5); /* Resplandor rosa */
+}
+
+/* Ajuste Mobile para el buscador */
+@media (max-width: 600px) {
+  .search-box input {
+    width: 140px;
+  }
+  .search-box input:focus {
+    width: 180px;
+  }
+}
+
+/* css/styles.css - Agrega esto al final */
+
+/* Fondo oscurecido */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85); /* Fondo negro semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none; /* No se puede clicar si está oculto */
+  transition: opacity 0.3s ease;
+}
+
+/* Clase para mostrar el modal */
+.modal.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Caja de contenido */
+.modal-content {
+  background-color: var(--bg-card);
+  width: 90%;
+  max-width: 800px;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+  border: 1px solid var(--primary-color); /* Borde rosa */
+  box-shadow: 0 0 20px rgba(228, 0, 124, 0.3);
+}
+
+.modal-body {
+  display: flex;
+  gap: 20px;
+  color: var(--text-white);
+}
+
+.modal-body img {
+  width: 200px;
+  border-radius: 8px;
+}
+
+.modal-info h2 {
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.modal-meta {
+  color: #ffd700; /* Dorado para estrellas */
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+#modal-overview {
+  line-height: 1.6;
+  color: var(--text-gray);
+}
+
+/* Botón de cerrar (X) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 30px;
+  color: var(--text-white);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: var(--primary-color);
+}
+
+/* Ajuste para celulares */
+@media (max-width: 600px) {
+  .modal-body {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .modal-body img {
+    width: 150px;
+  }
+}
+/* css/styles.css - Sección de Contacto */
+
+.contact-section {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.contact-section h2 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+#contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilos de los Inputs */
+.form-group {
+  text-align: left;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: var(--text-white);
+  font-family: var(--font-main);
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+}
+
+/* --- Estilos de Error (Validación) --- */
+input.error,
+textarea.error {
+  border-color: #ff4444; /* Rojo error */
+  background-color: rgba(255, 68, 68, 0.1);
+}
+
+.error-msg {
+  color: #ff4444;
+  font-size: 0.8rem;
+  display: none; /* Oculto por defecto */
+  margin-top: 5px;
+}
+
+/* Mostrar mensaje si el input tiene la clase error */
+.form-group.invalid .error-msg {
+  display: block;
+}
+
+/* Botón de Enviar */
+.btn-submit {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.btn-submit:hover {
+  background-color: var(--primary-hover);
 }
