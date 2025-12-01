@@ -120,3 +120,64 @@ window.addEventListener("click", (e) => {
     modal.classList.remove("show");
   }
 });
+
+// js/app.js - Al final del archivo
+
+// --- Lógica del Formulario de Contacto ---
+const contactForm = document.getElementById("contact-form");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
+
+contactForm.addEventListener("submit", (e) => {
+  e.preventDefault(); // Evita que se recargue la página
+
+  let isValid = true;
+
+  // 1. Validar Nombre (No vacío)
+  if (nameInput.value.trim() === "") {
+    setError(nameInput);
+    isValid = false;
+  } else {
+    setSuccess(nameInput);
+  }
+
+  // 2. Validar Email (Formato regex simple)
+  if (!isValidEmail(emailInput.value)) {
+    setError(emailInput);
+    isValid = false;
+  } else {
+    setSuccess(emailInput);
+  }
+
+  // 3. Validar Mensaje (No vacío)
+  if (messageInput.value.trim() === "") {
+    setError(messageInput);
+    isValid = false;
+  } else {
+    setSuccess(messageInput);
+  }
+
+  // Si todo es válido
+  if (isValid) {
+    alert("¡Mensaje enviado con éxito! (Simulación)");
+    contactForm.reset(); // Limpiar formulario
+  }
+});
+
+// Funciones auxiliares para mostrar/quitar errores
+function setError(input) {
+  input.classList.add("error"); // Pone borde rojo
+  input.parentElement.classList.add("invalid"); // Muestra mensaje de texto
+}
+
+function setSuccess(input) {
+  input.classList.remove("error");
+  input.parentElement.classList.remove("invalid");
+}
+
+function isValidEmail(email) {
+  // Expresión regular básica para validar correos
+  const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return re.test(String(email).toLowerCase());
+}

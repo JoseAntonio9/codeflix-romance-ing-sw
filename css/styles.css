@@ -264,3 +264,82 @@ body {
     width: 150px;
   }
 }
+/* css/styles.css - Sección de Contacto */
+
+.contact-section {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  text-align: center;
+}
+
+.contact-section h2 {
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+
+#contact-form {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Estilos de los Inputs */
+.form-group {
+  text-align: left;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  border: 1px solid #444;
+  background-color: #222;
+  color: var(--text-white);
+  font-family: var(--font-main);
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: var(--primary-color);
+}
+
+/* --- Estilos de Error (Validación) --- */
+input.error,
+textarea.error {
+  border-color: #ff4444; /* Rojo error */
+  background-color: rgba(255, 68, 68, 0.1);
+}
+
+.error-msg {
+  color: #ff4444;
+  font-size: 0.8rem;
+  display: none; /* Oculto por defecto */
+  margin-top: 5px;
+}
+
+/* Mostrar mensaje si el input tiene la clase error */
+.form-group.invalid .error-msg {
+  display: block;
+}
+
+/* Botón de Enviar */
+.btn-submit {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+
+.btn-submit:hover {
+  background-color: var(--primary-hover);
+}
